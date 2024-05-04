@@ -1,6 +1,8 @@
 const choiceArray = ["rock", "paper", "scissors"];
 let humanScore = 0;
 let computerScore = 0;
+let rounds = 0;
+playGame();
 
 function getComputerChoice() {
   let randomChoice = Math.floor(Math.random() * choiceArray.length);
@@ -20,23 +22,46 @@ function getHumanChoice() {
 }
 let human = getHumanChoice();
 
-function playRound(humanChoice, computerChoice) {
-  if (humanChoice === computerChoice) {
+function playRound(human, computer) {
+  if (human === computer) {
     console.log(
-      `that is a tai !! you choose ${humanChoice} and computer choose ${computerChoice}`
+      `that is a tai !! you choose ${human} and computer choose ${computer}`
     );
   } else if (
-    (humanChoice === "rock" && computerChoice === "scissors") ||
-    (humanChoice === "paper" && computerChoice === "rock") ||
-    (humanChoice === "scissors" && computerChoice === "paper")
+    (human === "rock" && computer === "scissors") ||
+    (human === "paper" && computer === "rock") ||
+    (human === "scissors" && computer === "paper")
   ) {
     console.log(
-      `you win!!  you choose ${humanChoice} and computer choose ${computerChoice}`
+      `you win!!  you choose ${human} and computer choose ${computer}`
     );
+    humanScore++;
   } else {
     console.log(
-      `you lose ! computer chose ${computerChoice} and you choose ${humanChoice}`
+      `you lose ! computer chose ${computer} and you choose ${human}`
     );
+    computerScore++;
   }
 }
-playRound(human, computer);
+
+
+function playGame(){
+    for(let i = 1 ; i< 5 ; i++){
+        if (humanScore < 3 || computerScore < 3 ){
+        playRound(getHumanChoice(),getComputerChoice());
+        rounds++;
+        console.log(`round : ${rounds} , computer score :${computerScore} , human score : ${humanScore}`);
+        }
+        else{
+            return
+        }
+    }
+    getWinner();
+}
+function getWinner(){
+    humanScore > computerScore ? 
+        console.log(`you win !! you score : ${humanScore} , computer score : ${computerScore}`)
+        :
+            console.log(`you lose !! you score : ${humanScore} , computer score : ${computerScore}`);}
+
+        
